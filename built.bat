@@ -1,24 +1,16 @@
 @echo off
-REM Set environment variables if needed
-REM set JAVA_HOME=C:\path\to\java
-
 REM Change directory to the project folder
 cd /d %~dp0
 
-REM Clean previous builds
-echo Cleaning previous builds...
-if exist build rmdir /s /q build
+REM Set up virtual environment
+python -m venv venv
+call venv\Scripts\activate
 
-REM Create build directory
-mkdir build
-
-REM Compile Java source files
-echo Compiling Java source files...
-javac -d build src\*.java
+REM Install dependencies
+pip install -r requirements.txt
 
 REM Run the application
-echo Running the application...
-java -cp build Main
+python main.py
 
 REM Display completion message
 echo Build and run complete!
